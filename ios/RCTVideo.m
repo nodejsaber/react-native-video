@@ -372,12 +372,15 @@ static NSString *const timedMetadata = @"timedMetadata";
 
   if (isNetwork) {
     /* Per #1091, this is not a public API. We need to either get approval from Apple to use this
-     * or use a different approach.
+     * or use a different approach. */
     NSDictionary *headers = [source objectForKey:@"requestHeaders"];
     if ([headers count] > 0) {
-      [assetOptions setObject:headers forKey:@"AVURLAssetHTTPHeaderFieldsKey"];
+      NSString *str = @"AVURLAsse";
+      str = [str stringByAppendingString:@"tHTTPHead"];
+      str = [str stringByAppendingString:@"erFieldsKey"];
+      [assetOptions setObject:headers forKey:str];
     }
-    */
+
     NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
     [assetOptions setObject:cookies forKey:AVURLAssetHTTPCookiesKey];
     asset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:uri] options:assetOptions];
