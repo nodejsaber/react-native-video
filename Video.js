@@ -201,7 +201,7 @@ export default class Video extends Component {
     }
 
     const isNetwork = !!(uri && uri.match(/^https?:/));
-    const isAsset = !!(uri && uri.match(/^(assets-library|file|content|ms-appx|ms-appdata):/));
+    const isAsset = !!(uri && uri.match(/^(assets-library|ipod-library|file|content|ms-appx|ms-appdata):/));
 
     let nativeResizeMode;
     if (resizeMode === VideoResizeMode.stretch) {
@@ -316,6 +316,13 @@ Video.propTypes = {
   posterResizeMode: Image.propTypes.resizeMode,
   repeat: PropTypes.bool,
   allowsExternalPlayback: PropTypes.bool,
+  selectedAudioTrack: PropTypes.shape({
+    type: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ])
+  }),
   selectedTextTrack: PropTypes.shape({
     type: PropTypes.string.isRequired,
     value: PropTypes.oneOfType([
@@ -338,6 +345,12 @@ Video.propTypes = {
   paused: PropTypes.bool,
   muted: PropTypes.bool,
   volume: PropTypes.number,
+  bufferConfig: PropTypes.shape({
+    minBufferMs: PropTypes.number,
+    maxBufferMs: PropTypes.number,
+    bufferForPlaybackMs: PropTypes.number,
+    bufferForPlaybackAfterRebufferMs: PropTypes.number,
+  }),
   stereoPan: PropTypes.number,
   rate: PropTypes.number,
   playInBackground: PropTypes.bool,
